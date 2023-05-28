@@ -16,37 +16,21 @@ class Codex(commands.Cog):
     
     def spell_format(self, data):
         
-        print("build variables")
         # build variables
         level = data['level']
-        print("built level")
         desc = str(data['desc'])[2:-2]
-        print("built desc")
         higher_level = str(data['higher_level'])[1:-1]
-        print("built higher_level")
         range = data['range']
-        print("built range")
         components = str(data['components'])[1:-1].replace("'","")
-        print("built components")
         material = data['material'] if 'material' in data else None
-        print("built material")
         ritual = data['ritual']
-        print("built ritual")
         casting_time = data['casting_time']
-        print("built casting_time")
         concentration = data['concentration']
-        print("built concentration")
         duration = data['duration']
-        print("built duration")
         school = data['school']['name']
-        print("built school")
         classes = str([class_data['name'] for class_data in data['classes']])[1:-1].replace("'","")
-        print("built classes")
         subclasses = str([subclass_data['name'] for subclass_data in data['subclasses']])[1:-1].replace("'","")
-        print("built subclasses")
-        print("built all")
 
-        print("construct string")
         # construct string
         string = ""
         string += f"*Level {level} {school}: "
@@ -88,7 +72,6 @@ class Codex(commands.Cog):
             return
         # print(data)
         message = Codex.spell_format(self, data)
-        print("post-message")
         embed = discord.Embed(description=message, title=data['name'], color=discord.Color.blue())
         embed.set_author(name="Spell Card", icon_url=self.bot.user.avatar.url)
         await ctx.channel.send(embed=embed)

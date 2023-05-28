@@ -9,6 +9,7 @@ with open('bot_config.json') as config_file:
 intents = discord.Intents.default()
 intents.members = True
 intents.presences = True
+intents.reactions = True
 intents.dm_messages = True
 intents.guild_messages = True
 intents.message_content = True
