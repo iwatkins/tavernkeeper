@@ -7,7 +7,6 @@ class MyClass(commands.Cog):
 
     # Change both instances of MyClass to the name of your module
     # Insert your code here
-    # register your module in bot.py
 
     # @commands.Cog.listener()
     # heading to define event functions

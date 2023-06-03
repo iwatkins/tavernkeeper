@@ -20,14 +20,18 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 async def on_ready():
     print(f'Bot is ready. Logged in as {bot.user.name}')
 
-# load all modules
+# load all modules - will load all .py scripts in the selected folder as a module.  Use Cog formats
 async def load():
-    # for filename in os.listdir(f'./modules'): #this is killing asyncio and the initialization
-    #     if filename.endswith('py'):
-    #         bot.load_extension(f'modules.{filename[:-3]}')
-    await bot.load_extension('modules.greetings')
-    await bot.load_extension('modules.roller')
-    await bot.load_extension('modules.codex')
+    module_folder = 'modules' # set your modules folder name here
+    for filename in os.listdir(module_folder):
+        if filename.endswith('.py') and filename != 'sample.py': # ignore the sample plugin
+            module_name = filename[:-3] # remove .py from file_name
+            module_path = f'{module_folder}.{module_name}'
+            try:
+                await bot.load_extension(module_path)
+                print(f'Successfully loaded module: {module_name}')
+            except Exception as e:
+                print(f'Failed to load module {module_name}: {str(e)}')
 
 async def main():
     await load()
