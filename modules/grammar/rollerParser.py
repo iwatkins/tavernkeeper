@@ -1,4 +1,4 @@
-from modules.ply import yacc, lex
+from modules.ply import yacc
 import rollerLexer
 
 tokens = rollerLexer.tokens
@@ -23,7 +23,7 @@ def p_empty(p):
     """
     empty :
     """
-    p[0] = 'empty'
+    p[0] = ('empty', 0)
 
 
 def p_expression(p):
@@ -66,13 +66,7 @@ def p_error(p):
     print(f'Syntax error at {p.value!r}')
 
 
-# Build the parser
 parser = yacc.yacc()
-
-
-# Parse an expression
-ast = parser.parse('')
-print(ast)
 
 
 def parse(data, debug=0):
