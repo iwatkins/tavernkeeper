@@ -1,19 +1,17 @@
 from discord.ext import commands
 import discord
+import modules.grammar.rollerResolver as rollerResolver
 
-class MyClass(commands.Cog):
+
+class OverEngineeredRoller(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    # Change both instances of MyClass to the name of your module
-    # Insert your code here
+    @commands.command(aliases=['r2'])
+    async def roll2(self, ctx, *, expression):
+        response = rollerResolver.run(expression)
+        await ctx.send(response)
 
-    # @commands.Cog.listener()
-    # heading to define event functions
-
-    # @Commands.command()
-    # heading to define command functions
 
 async def setup(bot):
-    await bot.add_cog(MyClass(bot))
-
+    await bot.add_cog(OverEngineeredRoller(bot))
